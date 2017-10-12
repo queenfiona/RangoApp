@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
 	<title>Rango</title>
 </head>
 <body>
 <h1>Rango says...</h1>
-<p>  Hello World!  <strong> {{boldmessage}}</strong> <br> <a href="/rango/about">About</a> </p>
+<p>  Hello World!  <strong> {{boldmessage}}</strong> <br> <a href="/rango/about">About</a> <br> <img src="{% static 'images/chanya_fiona.jpg'%}" alt="Picture of Rango"></p>
 
 
 </body>
