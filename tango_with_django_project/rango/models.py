@@ -25,6 +25,13 @@ class Page(models.Model):
 
 	class Meta:
 		verbose_name_plural= "Pages"
+
+class PageAdmin(object):
+	"""docstring for PageA"""
+	def __init__(self, arg):
+		super(PageA, self).__init__()
+		self.arg = arg
+		
 		
 
 		
