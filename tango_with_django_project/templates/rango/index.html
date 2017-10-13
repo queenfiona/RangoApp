@@ -5,9 +5,18 @@
 	<title>Rango</title>
 </head>
 <body>
-<h1>Rango says...</h1>
-<p>  Hello World!  <strong> {{boldmessage}}</strong> <br> <a href="/rango/about">About</a> <br> <img src="{% static 'images/chanya_fiona.jpg'%}" alt="Picture of Rango"></p>
-
-
+<h1>Rango says... Hello World</h1>
+<p>
+	{% if categories%}
+	<ul>
+		{% for category in categories%}
+		<li> {{ category.name}}</li>
+		{% endfor%}
+	</ul>
+	{% else %}
+	<strong> There are no categories present</strong> <br>
+	{% endif %}
+	<a href="/rango/about">About</a>
+</p>
 </body>
 </html>
