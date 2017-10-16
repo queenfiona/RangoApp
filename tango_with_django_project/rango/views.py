@@ -2,8 +2,17 @@ from django.shortcuts import render
 from rango.models import Category,Page
 
 def index(request):
-	category_list=Category.objects.order_by('-likes')[:5]
-	return render(request,'rango/index.html',{"categories": category_list})
+    context_dict={}
+    try:
+        category_list=Category.objects.order_by('-likes')[:5]
+        context_dict['categories']=category_list
+
+        page_list=Page.objects.order_by('-views')[:5]
+        context_dict['pages']=page_list
+    except Exception as e:
+        raise e
+    
+    return render(request, 'rango/index.html',context_dict)
 
 def about(request):
 	return render(request,'rango/about.html',{"aboutmessage" : "This is the about text from the about view"})
@@ -35,3 +44,14 @@ def category(request,category_name_slug):
 
     # Go render the response and return it to the client.
     return render(request, 'rango/category.html', context_dict)
+
+def page(request,page_name_slug):
+    context_dict={}
+    try:
+        pages=Category.objects.get(slug=page_name_slug)
+        context_dict['page_title'] =pages.title
+        context_dict['pages']=pages
+    except Page.DoesNotExist:
+        pass
+
+    return render(request,'rango/page.html',context_dict)
