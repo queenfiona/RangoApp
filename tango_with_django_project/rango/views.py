@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rango.models import Category,Page
+from .models import Category,Page
+from .forms import CategoryForm, PageForm
 
 def index(request):
     context_dict={}
@@ -55,3 +56,19 @@ def page(request,page_name_slug):
         pass
 
     return render(request,'rango/page.html',context_dict)
+
+def add_category(request):
+    if request.method == 'POST':
+        form=CategoryForm(request.POST)
+        if form.is_valid():
+            # Save the new category to the database.
+            form.save(commit=True)
+            # Now call the index() view.The user will be shown the homepage.
+            return index(request)
+        else:
+            print (form.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        form=CategoryForm()
+
+    return render(request,'rango/add_category.html',{'form' : form})

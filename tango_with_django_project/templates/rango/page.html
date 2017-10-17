@@ -4,12 +4,12 @@
 	<title>Top five pages</title>
 </head>
 <body>
-{% if pages%}
+{% if pages %}
 <h1> {{ page_title }}</h1>
 <p>
 	{% for page in pages%}
 	<ul>
-		<li><a href="{{page.url}}">{{ page.title }}</a></li>
+		<li><a href="{% url 'rango:page' page.slug%}">{{ page.title }}</a></li>
 	</ul>
 	{% endfor %}
 </p>
