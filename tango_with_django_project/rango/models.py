@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 class Category(models.Model):
 	"""docstring for Category"""
@@ -38,6 +39,16 @@ class Page(models.Model):
 
 	class Meta:
 		verbose_name_plural= "Pages"
+
+# Add a user profile
+class UserProfile(models.Model):
+	# Needed to UserProfile to User model instance
+	user = models.OneToOneField(User)
+	website = models.URLField(blank=True)
+	picture = models.ImageField(upload_to = 'profile_images',blank=True)
+
+	def __unicode__(self):
+		return self.user.username
 
 
 		

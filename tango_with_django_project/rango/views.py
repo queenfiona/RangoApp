@@ -6,6 +6,7 @@ from .forms import CategoryForm, PageForm
 def index(request):
     context_dict={}
     try:
+        # The inclusion of '-' sorts the values in descending order
         category_list=Category.objects.order_by('-likes')[:5]
         context_dict['categories']=category_list
 

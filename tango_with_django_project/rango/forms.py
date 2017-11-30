@@ -34,8 +34,8 @@ class PageForm(forms.ModelForm):
 		cleaned_data=self.cleaned_data
 		url=cleaned_data.get('url')
 		# If url is not empty and doesn't start with 'http://', prepend 'http://'.
-		if url and not url.startswith('http://'):
-			url = ('http://') + url
+		if url and not url.startswith('https://'):
+			url = ('https://') + url
 			cleaned_data['url']=url
 		return cleaned_data
 
@@ -43,4 +43,5 @@ class PageForm(forms.ModelForm):
 	class Meta:
 		model=Page
 		exclude=('category',)
+		# or specifify fields to include (i.e exclude 'category') e.g fields('title','url','views')
 
